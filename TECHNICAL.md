@@ -1,9 +1,8 @@
-# Reliable NYC Taxi Data Platform — Technical Documentation
+# Reliable NYC Taxi Data Pipeline — Technical Documentation
 
 This document explains how the automated NYC Taxi data pipeline is built,
 configured, and run.
 
-[← Back to Project README](README.md)
 
 ## Data Sources
 
@@ -39,8 +38,8 @@ gcloud auth application-default login
 
 ```bash
 # Clone the repo
-git clone https://github.com/MNAtthoriq/de-projects-beyond-zoomcamp.git
-cd de-projects-beyond-zoomcamp
+https://github.com/rajatm17/NYC-Taxi-Data-Pipline.git
+cd NYC-Taxi-Data-Pipeline
 
 # Install dependencies
 uv sync --locked
@@ -146,11 +145,11 @@ terraform destroy
 ├── .env.secrets.example
 │
 ├── flows/
-│   ├── main_zoomcamp.00_environment_setup.yaml
-│   ├── main_zoomcamp.01_taxi_tripdata_pipeline.yaml
-│   ├── main_zoomcamp.02_taxi_zone_pipeline.yaml
-│   ├── main_zoomcamp.03_proof_views_pipeline.yaml
-│   └── main_zoomcamp.99_monitoring_alerts.yaml
+│   ├── 00_environment_setup.yaml
+│   ├── 01_taxi_tripdata_pipeline.yaml
+│   ├── 02_taxi_zone_pipeline.yaml
+│   ├── 03_proof_views_pipeline.yaml
+│   └── 99_monitoring_alerts.yaml
 │
 ├── scripts/
 │   ├── bootstrap_env.sh
@@ -164,7 +163,7 @@ terraform destroy
 │
 ├── proof/
 │   ├── proof_export.pdf
-│   └── proof.gif
+│   
 │
 ├── README.md
 └── TECHNICAL.md
@@ -219,19 +218,6 @@ In simple terms:
 
 ## Technical Notes
 
-### How This Extends the Zoomcamp Project
-
-| Original tutorial | My Version |
-| :--- | :--- |
-| Static CSV backup | Monthly Parquet files from the official NYC TLC source |
-| No retry, quality check, or alerting | Automatic retries, data checks, and Gmail failure alerts |
-| No handling for source changes | Handles new source columns without rebuilding the table |
-| Temporary tables remain after loading | Temporary tables are automatically cleaned up |
-| Infrastructure and pipeline setup mixed together | Terraform manages infrastructure; Kestra runs the pipeline |
-| Flows manually added to Kestra | Flows are synced automatically |
-| Secrets configured manually | Scripts automate secret configuration |
-| No monitoring output | Monitoring views and an interactive dashboard |
-
 
 ### Key Learnings
 
@@ -243,17 +229,3 @@ In simple terms:
 | **Kestra Templates** | Complex template expressions are easier to maintain when intermediate values are declared as variables first. |
 | **Scheduled Runs** | Concurrency settings can block a scheduled execution, so trigger and execution state should be checked when debugging schedules. |
 
-
-## About Me
-
-I am an Operations Analyst with two years of experience using data,
-automation, and dashboards to improve operational workflows and decision-making.
-
-My professional work includes Python automation, reusable data-processing
-pipelines, operational reporting, data validation, and dashboard development.
-
-I am expanding that experience into cloud data engineering, workflow
-orchestration, data warehousing, and analytics engineering.
-
-[GitHub](https://github.com/MNAtthoriq) ·
-[LinkedIn](https://linkedin.com/in/mnatthoriq)
